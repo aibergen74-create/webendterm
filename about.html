@@ -1,70 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuizNova | About</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizNova - About Us</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header class="site-header">
-    <nav class="navbar navbar-expand-lg container py-3">
-        <a class="brand" href="index.html"><span class="brand-mark">Q</span><span>QuizNova</span></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="quiz.html">Quiz</a></li>
-                <li class="nav-item"><a class="nav-link" href="categories.html">Categories</a></li>
-                <li class="nav-item"><a class="nav-link" href="leaderboard.html">Leaderboard</a></li>
-                <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
 
-<main class="page-shell">
-    <section class="page-heading"><div class="container"><span class="eyebrow">OUR IDEA</span><h1>Learning can be fun.</h1><p>QuizNova was built as a student Web Technologies project with a simple goal: make quiz practice feel more interactive.</p></div></section>
-    <section class="container pb-5">
-        <img class="section-illustration mb-5" src="images/quiz-illustration.svg" alt="Quiz interface illustration" loading="lazy">
-        <div class="row g-4 align-items-stretch">
-            <div class="col-lg-7"><div class="content-card h-100"><span class="eyebrow">WHY QUIZNOVA?</span><h2>Learn. Play. Improve.</h2><p>Users can select a topic, answer timed questions, review their score and compare results with other players.</p><div class="check-list"><div>✓ Clean multi-page layout</div><div>✓ Responsive Bootstrap components</div><div>✓ Local leaderboard with browser storage</div><div>✓ Simple quiz flow with instant feedback</div></div></div></div>
-            <div class="col-lg-5"><div class="quote-card h-100"><div class="quote-mark">“</div><h3>Knowledge becomes easier to remember when you make it a game.</h3><p>Our design keeps the interface simple so the quiz stays the main focus.</p></div></div>
-        </div>
-
-        <div class="section-heading mt-5 mb-4"><span class="eyebrow">TEAM</span><h2>Meet the developers</h2><p>Each member worked on a separate part and helped with final integration.</p></div>
-        <div class="row g-4 team-grid">
-            <div class="col-md-6 col-lg-3"><article class="team-card"><div class="avatar">NY</div><h3>Nassypkeliyev Yerassyl</h3><p class="role">Project Lead & Quiz</p><span>Quiz logic, Home page and GitHub integration.</span></article></div>
-            <div class="col-md-6 col-lg-3"><article class="team-card"><div class="avatar">AA</div><h3>Aibergen Amanzhol</h3><p class="role">UI & Categories</p><span>Categories page, responsive cards and navigation.</span></article></div>
-            <div class="col-md-6 col-lg-3"><article class="team-card"><div class="avatar">RS</div><h3>Rassul Sissenbay</h3><p class="role">Leaderboard & Data</p><span>Leaderboard table, score storage and result display.</span></article></div>
-            <div class="col-md-6 col-lg-3"><article class="team-card"><div class="avatar">AT</div><h3>Adilzhan Tolegen</h3><p class="role">Pages & QA</p><span>About, Contact, testing and final visual polish.</span></article></div>
-        </div>
-
-        <div class="tech-box mt-5">
-            <div><span class="eyebrow">TECH STACK</span><h2>Built with course technologies</h2></div>
-            <div class="tech-tags"><span>HTML5</span><span>CSS3</span><span>Bootstrap 5</span><span>JavaScript</span><span>LocalStorage</span><span>GitHub Pages</span></div>
-        </div>
-    </section>
-</main>
-
-<footer class="site-footer">
-    <div class="container py-5">
-        <div class="row g-4">
-            <div class="col-lg-5"><a class="brand footer-brand" href="index.html"><span class="brand-mark">Q</span><span>QuizNova</span></a><p class="footer-text mt-3">Four students, six categories and one shared project.</p></div>
-            <div class="col-6 col-lg-2"><h4>Explore</h4><a href="index.html">Home</a><a href="quiz.html">Quiz</a><a href="categories.html">Categories</a></div>
-            <div class="col-6 col-lg-2"><h4>Project</h4><a href="leaderboard.html">Leaderboard</a><a href="contact.html">Contact</a></div>
-            <div class="col-lg-3"><h4>Contact</h4><p>Astana IT University<br>Astana, Kazakhstan</p></div>
-        </div>
-        <div class="footer-bottom mt-4"><span>© <span class="current-year"></span> QuizNova</span><span>Web Technologies Midterm</span></div>
+  <header class="custom-header">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo">Quiz<span>Nova</span></a>
+      <nav class="custom-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quizzes.html">Quizzes</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html" class="active">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="register.html" class="btn-nav-register">Register</a></li>
+        </ul>
+      </nav>
     </div>
-</footer>
+  </header>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/app.js"></script>
+  <main class="container my-5">
+    
+    <section class="row align-items-center mb-5">
+      <div class="col-12 col-md-6 mb-4 mb-md-0">
+        <h1 class="fw-bold">About QuizNova</h1>
+        <p class="lead text-primary">Interactive trivia platform created for Web Technologies-1 course.</p>
+        <p class="text-muted">
+          QuizNova is a project developed by students of Astana IT University (group SE-2538). 
+          The platform includes interactive quizzes, a real-time leaderboard with CRUD functionality, live search and category filtering, a photo gallery with lightbox, and a client-side validated registration form.
+        </p>
+      </div>
+      <div class="col-12 col-md-6">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&auto=format&fit=crop&q=60" 
+             alt="Team working together" 
+             class="img-fluid rounded-3 shadow-sm" 
+             loading="lazy">
+      </div>
+    </section>
+
+    <section class="p-4 bg-light rounded-3 border mb-5">
+      <h3 class="fw-bold mb-3">Project Overview</h3>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h5 class="fw-bold text-primary">Technologies Used:</h5>
+          <ul>
+            <li>HTML5 semantic layout</li>
+            <li>CSS3 (Flexbox, CSS Grid, media queries, variables)</li>
+            <li>Bootstrap 5.3 components and grid system</li>
+            <li>JavaScript ES6 & jQuery 3.7.1</li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <h5 class="fw-bold text-primary">Main Features:</h5>
+          <ul>
+            <li>Registration form validation with email regex and password strength meter</li>
+            <li>Live search and category filter for quizzes</li>
+            <li>Dynamic leaderboard table with CRUD and LocalStorage</li>
+            <li>Photo gallery with lightbox and jQuery fade transitions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="text-center mb-4">
+        <h2 class="fw-bold">Our Team (Group SE-2538)</h2>
+        <p class="text-muted">Students and their individual contributions to the project.</p>
+      </div>
+
+      <div class="row g-4">
+        
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100 text-center shadow-sm p-3">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=60" 
+                 class="rounded-circle mx-auto mb-3" 
+                 style="width: 90px; height: 90px; object-fit: cover;" 
+                 alt="Adilzhan T." 
+                 loading="lazy">
+            <div class="card-body p-0">
+              <h5 class="card-title fw-bold">Adilzhan T.</h5>
+              <p class="text-primary small fw-semibold">Team Lead & Form Validation</p>
+              <p class="card-text text-muted small text-start">
+                Created the registration page, wrote client-side validation logic with email regex, real-time feedback, and dynamic password strength meter.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100 text-center shadow-sm p-3">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&auto=format&fit=crop&q=60" 
+                 class="rounded-circle mx-auto mb-3" 
+                 style="width: 90px; height: 90px; object-fit: cover;" 
+                 alt="Rassul S." 
+                 loading="lazy">
+            <div class="card-body p-0">
+              <h5 class="card-title fw-bold">Rassul S.</h5>
+              <p class="text-primary small fw-semibold">Quizzes & Live Search</p>
+              <p class="card-text text-muted small text-start">
+                Developed the quizzes catalog, implemented real-time search with input events, and combined it with multi-category filter buttons.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100 text-center shadow-sm p-3">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=60" 
+                 class="rounded-circle mx-auto mb-3" 
+                 style="width: 90px; height: 90px; object-fit: cover;" 
+                 alt="Aibergen A." 
+                 loading="lazy">
+            <div class="card-body p-0">
+              <h5 class="card-title fw-bold">Aibergen A.</h5>
+              <p class="text-primary small fw-semibold">Leaderboard & CRUD</p>
+              <p class="card-text text-muted small text-start">
+                Implemented dynamic data table on leaderboard page with Create, Read, Update, Delete operations, confirmation prompts, and LocalStorage.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-3">
+          <div class="card h-100 text-center shadow-sm p-3">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&auto=format&fit=crop&q=60" 
+                 class="rounded-circle mx-auto mb-3" 
+                 style="width: 90px; height: 90px; object-fit: cover;" 
+                 alt="Yerassyl N." 
+                 loading="lazy">
+            <div class="card-body p-0">
+              <h5 class="card-title fw-bold">Yerassyl N.</h5>
+              <p class="text-primary small fw-semibold">Gallery & Lightbox</p>
+              <p class="card-text text-muted small text-start">
+                Built the responsive photo gallery and custom lightbox with jQuery fade transitions, navigation arrows, keyboard controls, and page styles.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <a href="#" class="floating-back-btn" title="Back to top">↑</a>
+
+  <footer class="custom-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <h5>QuizNova</h5>
+          <p class="small">Web Technologies-1 (Frontend) - Astana IT University.<br>Group SE-2538.</p>
+        </div>
+        <div class="col-12 col-md-6 text-md-end mb-3">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="quizzes.html">All Quizzes</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="gallery.html">Photo Gallery</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="text-center small">
+        &copy; 2026 QuizNova. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

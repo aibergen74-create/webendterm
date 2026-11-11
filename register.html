@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuizNova - Register</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="custom-header">
+    <div class="container header-container">
+      <a href="index.html" class="site-logo">Quiz<span>Nova</span></a>
+      <nav class="custom-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quizzes.html">Quizzes</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="register.html" class="active btn-nav-register">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        
+        <div class="text-center mb-4">
+          <h1 class="fw-bold">Player Registration</h1>
+          <p class="text-muted">Create an account to save your scores and compete in quizzes.</p>
+        </div>
+
+        <div id="formAlertSuccess" class="alert alert-success shadow-sm" style="display: none;" role="alert"></div>
+        <div id="formAlertError" class="alert alert-danger shadow-sm" style="display: none;" role="alert"></div>
+
+        <div class="card p-4 p-md-5 shadow-sm border-0 rounded-4 bg-white">
+          <form id="registrationForm" novalidate>
+            
+            <div class="mb-3">
+              <label for="regFullName" class="form-label fw-semibold">Full Name</label>
+              <input type="text" class="form-control" id="regFullName" placeholder="e.g. Yerassyl Nurlan" required>
+              <div id="nameFeedback" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regEmail" class="form-label fw-semibold">Email Address</label>
+              <input type="email" class="form-control" id="regEmail" placeholder="student@astanait.edu.kz" required>
+              <div id="emailFeedback" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regPassword" class="form-label fw-semibold">Password</label>
+              <input type="password" class="form-control" id="regPassword" placeholder="Enter password" required>
+              
+              <div class="password-strength-meter">
+                <div id="passwordStrengthBar" class="password-strength-bar"></div>
+              </div>
+              <div id="passwordStrengthText" class="password-feedback-text text-muted">
+                Password strength: None
+              </div>
+              
+              <div id="passwordFeedback" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regConfirmPassword" class="form-label fw-semibold">Confirm Password</label>
+              <input type="password" class="form-control" id="regConfirmPassword" placeholder="Repeat your password" required>
+              <div id="confirmPasswordFeedback" class="invalid-feedback"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="regTopic" class="form-label fw-semibold">Favorite Category</label>
+              <select class="form-select" id="regTopic">
+                <option value="cs" selected>Computer Science & Web Tech</option>
+                <option value="history">World History</option>
+                <option value="science">Science & Nature</option>
+                <option value="aitu">Astana IT University Trivia</option>
+                <option value="pop">Pop Culture & Cinema</option>
+              </select>
+            </div>
+
+            <div class="mb-4 form-check">
+              <input type="checkbox" class="form-check-input" id="regTerms" required>
+              <label class="form-check-label small text-muted" for="regTerms">
+                I agree to the Fair Play Rules and community terms.
+              </label>
+              <div class="invalid-feedback">You must agree before registering.</div>
+            </div>
+
+            <button type="submit" id="btnSubmitRegister" class="custom-btn w-100 py-3 fw-semibold">
+              Register Account
+            </button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <a href="#" class="floating-back-btn" title="Back to top">↑</a>
+
+  <footer class="custom-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6 mb-3">
+          <h5>QuizNova</h5>
+          <p class="small">Web Technologies-1 (Frontend) - Astana IT University.<br>Group SE-2538.</p>
+        </div>
+        <div class="col-12 col-md-6 text-md-end mb-3">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="quizzes.html">All Quizzes</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="gallery.html">Photo Gallery</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="text-center small">
+        &copy; 2026 QuizNova. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
