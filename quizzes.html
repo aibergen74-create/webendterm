@@ -215,22 +215,24 @@
         </div>
         <p class="text-muted small mt-2 mb-0">Fetching live trivia questions...</p>
       </div>
-
-      <div id="apiErrorBox" class="alert alert-danger d-flex justify-content-between align-items-center flex-wrap gap-2" style="display: none;" role="alert">
-        <span id="apiErrorMessage">Unable to load trivia questions right now.</span>
-        <button type="button" id="btnRetryApi" class="btn btn-sm btn-outline-danger">Try Again</button>
-      </div>
-
-      <div id="apiScoreBar" class="alert alert-info d-flex justify-content-between align-items-center flex-wrap gap-2" style="display: none;">
-        <div>
-          <strong>Live Session Score:</strong> <span id="apiLiveScoreText">0 / 0</span>
-        </div>
-        <div class="d-flex align-items-center gap-2">
-          <button type="button" id="btnSaveApiScore" class="btn btn-sm btn-success" style="display: none;">Save Score to Leaderboard</button>
-          <button type="button" id="btnRefreshApiQuiz" class="btn btn-sm btn-outline-primary">New Questions</button>
+<div id="apiErrorBox" class="alert alert-danger" style="display: none;" role="alert">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <span id="apiErrorMessage">Unable to load trivia questions right now.</span>
+          <button type="button" id="btnRetryApi" class="btn btn-sm btn-outline-danger">Try Again</button>
         </div>
       </div>
 
+      <div id="apiScoreBar" class="alert alert-info" style="display: none;">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+          <div>
+            <strong>Live Session Score:</strong> <span id="apiLiveScoreText">0 / 0</span>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <button type="button" id="btnSaveApiScore" class="btn btn-sm btn-success" style="display: none;">Save Score to Leaderboard</button>
+            <button type="button" id="btnRefreshApiQuiz" class="btn btn-sm btn-outline-primary">New Questions</button>
+          </div>
+        </div>
+      </div>
       <div id="apiQuestionsContainer"></div>
     </section>
   </main>
