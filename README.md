@@ -57,3 +57,10 @@ QuizNova lets players explore curated trivia categories, play live API-powered q
 1. Clone or download the repository and open `index.html` in a browser (or run it with VS Code Live Server).
 2. Commit and push changes to the `main` branch before the submission deadline.
 3. GitHub Pages publishes the site automatically from `main` (`/root`) at [https://aibergen74-create.github.io/webendterm/](https://aibergen74-create.github.io/webendterm/).
+<img width="987" height="848" alt="image" src="https://github.com/user-attachments/assets/a52fef34-03f4-4cbb-a6ef-8fe85cfe99e4" />
+<img width="1185" height="854" alt="image" src="https://github.com/user-attachments/assets/ff29c616-2177-4850-85ea-91757a68261e" />
+<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/d4267141-8f78-42d2-b126-4d5a9fbb0b4f" />
+<img width="1919" height="906" alt="image" src="https://github.com/user-attachments/assets/ee67660c-60e3-4370-9e0e-546382d7626b" />
+<img width="1919" height="904" alt="image" src="https://github.com/user-attachments/assets/ea7a50af-6381-4caa-a5f3-39c10ae826d2" />
+<img width="1919" height="904" alt="image" src="https://github.com/user-attachments/assets/a55126f1-dc6e-4b64-a982-ad4e9332d1b8" />
+
