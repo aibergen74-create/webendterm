@@ -1,10 +1,4 @@
-/* ========================================================
-   PROJECT: AITU QuizHub (Quiz & Trivia Website)
-   CSS Stylesheet: /css/style.css
-   Course: Web Technologies-1 (Frontend) - Astana IT University
-   ======================================================== */
 
-/* 1. CSS VARIABLES (:root) - Требование: минимум 3 переменные */
 :root {
   --primary-color: #0d6efd;
   --primary-hover: #0b5ed7;
@@ -15,7 +9,6 @@
   --border-color: #dee2e6;
 }
 
-/* 2. BASE STYLES & GOOGLE FONTS */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -33,10 +26,9 @@ body {
 }
 
 main {
-  flex: 1; /* Чтобы подвал всегда был прижат к низу страницы */
+  flex: 1; 
 }
 
-/* 3. HEADER & NAVIGATION (FLEXBOX) - Требование: Flexbox в header */
 .custom-header {
   background-color: #ffffff;
   border-bottom: 2px solid var(--border-color);
@@ -75,7 +67,6 @@ main {
   transition: all 0.2s ease;
 }
 
-/* :hover и :focus на ссылках навигации */
 .custom-nav a:hover,
 .custom-nav a:focus {
   color: var(--primary-color);
@@ -88,7 +79,6 @@ main {
   background-color: var(--primary-color);
 }
 
-/* 4. HERO SECTION */
 .hero-section {
   background: linear-gradient(135deg, #0d6efd 0%, #004085 100%);
   color: #ffffff;
@@ -97,7 +87,6 @@ main {
   margin-bottom: 40px;
 }
 
-/* 5. FLEXBOX STATS BLOCK - Демонстрация Flexbox */
 .stats-flex-container {
   display: flex;
   justify-content: space-around;
@@ -122,7 +111,6 @@ main {
   color: var(--primary-color);
 }
 
-/* 6. CSS GRID - Требование: Layout with Grid */
 .quizzes-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -130,9 +118,8 @@ main {
   margin-top: 25px;
 }
 
-/* 7. POSITIONING (RELATIVE & ABSOLUTE) - Требование: позиционирование */
 .quiz-card-wrapper {
-  position: relative; /* Относительное позиционирование для родителя */
+  position: relative; 
   background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: 10px;
@@ -146,7 +133,7 @@ main {
 }
 
 .quiz-badge {
-  position: absolute; /* Абсолютное позиционирование для бейджа */
+  position: absolute; 
   top: 15px;
   right: 15px;
   background-color: var(--secondary-color);
@@ -158,7 +145,6 @@ main {
   text-transform: uppercase;
 }
 
-/* POSITIONING (FIXED) - Плавающая кнопка помощи / наверх */
 .floating-back-btn {
   position: fixed;
   bottom: 20px;
@@ -182,7 +168,6 @@ main {
   color: #ffffff;
 }
 
-/* 8. BUTTONS (:hover & :focus) */
 .custom-btn {
   background-color: var(--primary-color);
   color: #ffffff;
@@ -205,7 +190,6 @@ main {
   outline: 3px solid rgba(13, 110, 253, 0.4);
 }
 
-/* 9. PSEUDO-CLASS :nth-child() - Требование: стилизация таблицы лидеров */
 .leaderboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -236,13 +220,11 @@ main {
   background-color: #e2edff;
 }
 
-/* Выделение первого места золотым цветом через :nth-child(1) */
 .leaderboard-table tbody tr:nth-child(1) td:first-child {
   font-weight: bold;
   color: #d4a000;
 }
 
-/* 10. FOOTER STYLING */
 .custom-footer {
   background-color: var(--dark-bg);
   color: #ced4da;
@@ -259,12 +241,10 @@ main {
   color: #ffffff;
 }
 
-/* 11. RESPONSIVE DESIGN (@media queries) - Требование: минимум 2 брейкпоинта */
 
-/* Брейкпоинт 1: Планшеты (меньше 992px) */
 @media (max-width: 992px) {
   .quizzes-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 колонки вместо 3 */
+    grid-template-columns: repeat(2, 1fr); 
   }
 
   .hero-section h1 {
@@ -272,9 +252,7 @@ main {
   }
 }
 
-/* Брейкпоинт 2: Мобильные телефоны (меньше 768px) */
 @media (max-width: 768px) {
-  /* Меню перестраивается в колонку */
   .header-container {
     flex-direction: column;
     gap: 15px;
@@ -288,7 +266,7 @@ main {
   }
 
   .quizzes-grid {
-    grid-template-columns: 1fr; /* 1 колонка на смартфонах */
+    grid-template-columns: 1fr; 
   }
 
   .stats-flex-container {
@@ -653,9 +631,6 @@ main {
 }
 
 
-/* ========================================================
-   FINAL PROJECT: THEME TOGGLE, AUTH UI, FAQ & LIVE API
-   ======================================================== */
 
 .header-container {
   gap: 16px;
@@ -744,7 +719,6 @@ main {
   color: #ffffff;
 }
 
-/* FAQ ACCORDION (jQuery slideToggle) */
 .faq-section {
   max-width: 860px;
   margin: 0 auto;
@@ -818,7 +792,6 @@ main {
   margin-bottom: 0;
 }
 
-/* LIVE TRIVIA API SECTION */
 .live-api-section {
   background-color: #f8f9fa;
   border: 1px solid var(--border-color);
@@ -881,7 +854,6 @@ main {
   font-weight: 600;
 }
 
-/* DARK THEME */
 body.dark-theme,
 [data-theme="dark"] body {
   background-color: #111622;
