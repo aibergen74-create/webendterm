@@ -11,89 +11,64 @@
 
 ## Group Members & Contributions
 
-| Student | Role | Midterm Contribution | Endterm Contribution |
+| Student | Role | Midterm & Endterm Contribution | Final Project Contribution |
 |---|---|---|---|
-| **Adilzhan Tolegen** | Form Validation & Base Setup | Project repository setup, base CSS styling, `index.html` structure. | Built `register.html`, wrote client-side validation logic in `script.js` (email regex check, password strength bar, password match verification, input feedback). |
-| **Rassul Sissenbay** | Search & Filter Specialist | Designed `quizzes.html` layout, grid styling, and difficulty badges. | Added dynamic real-time search input and category filter buttons using jQuery `.on('input')` and click events with instant card filtering. |
-| **Aibergen Amanzhol** | Leaderboard & CRUD Engineer | Created semantic leaderboard ranking table and score summary layout. | Built full CRUD operations on `leaderboard.html` (modal create, table read, modal edit, confirm delete) and linked with LocalStorage. |
-| **Nassypkeliyev Yerassyl** | Gallery & Lightbox Specialist | Designed `contact.html` and mobile media queries for responsive layouts. | Implemented `gallery.html` with responsive image grid, custom lightbox modal with jQuery `.fadeIn()` / `.fadeOut()`, navigation arrows, and keyboard controls. |
+| **Adilzhan Tolegen** | Team Lead & Auth / Validation | Repository setup, base CSS, `index.html`, `register.html` with email regex validation, password strength meter, and real-time feedback. | Implemented Sign-in / Sign-out functionality (`signin.html` and navbar session UI) using `localStorage`, form validation, and signed-in player profile view. |
+| **Rassul Sissenbay** | Quizzes, Search & API Integration | Built `quizzes.html` catalog, interactive modal quiz engine, real-time search, and multi-category filter buttons. | Integrated the Open Trivia Database API (`fetch()` + JSON) on `quizzes.html` with category/difficulty/count selectors, dynamic question rendering, live scoring, and error handling; added random fact refresh API on `index.html`. |
+| **Aibergen Amanzhol** | Leaderboard CRUD & Theme System | Built dynamic `leaderboard.html` table with Create, Read, Update, Delete operations, confirmation prompts, and `localStorage` persistence. | Implemented the site-wide Light/Dark Theme Toggle saved in `localStorage` across all pages with Bootstrap 5.3 dark theme integration and custom CSS variables. |
+| **Nassypkeliyev Yerassyl** | Gallery, FAQ & Responsive Design | Built `contact.html`, responsive media queries, and `gallery.html` with custom lightbox using jQuery `.fadeIn()` / `.fadeOut()` and keyboard navigation. | Implemented the 6-question FAQ accordion on `index.html` using jQuery `.slideToggle()` with smooth animations and `+` / `−` state indicators, and verified responsive layout across devices. |
 
 ---
 
-## Short Description
+## Project Description
 
-QuizNova is an interactive web platform for trivia and quiz competitions. The website allows users to browse quizzes across multiple categories (Computer Science, Astana IT University, History, Science, Pop Culture), search quizzes in real time, play interactive tests, view and manage a dynamic high-score leaderboard, explore tournament photos in a fullscreen lightbox gallery, and register with client-side form validation.
+QuizNova is a multi-page interactive trivia and quiz web platform built with HTML5, CSS3, Bootstrap 5.3, JavaScript (ES6), and jQuery 3.7.1. Users can switch between Light and Dark themes, register and sign in with persistent browser sessions, play both curated and live API-powered trivia quizzes, manage scores in a CRUD leaderboard, browse a photo lightbox gallery, and explore answers in an interactive FAQ accordion.
 
 ---
 
-## Features Implemented
+## Implemented Features
 
-1. **Form Validation (`register.html`)**
-   - Required input checks for name, email, password, confirm password, and terms agreement.
-   - Email format verification using Regular Expressions (RegEx).
-   - Real-time password strength meter that changes color and width (weak, medium, strong).
-   - Live password confirmation match check.
-   - Form submission lock when inputs are invalid, with clear error messages.
+1. **HTML5 & Responsive CSS3 (8 Connected Pages)**
+   - Pages: `index.html`, `quizzes.html`, `leaderboard.html`, `gallery.html`, `about.html`, `contact.html`, `signin.html`, `register.html`.
+   - Shared Flexbox navigation bar across all pages, CSS Grid layouts, custom CSS variables, and responsive breakpoints for desktop, tablet, and mobile devices.
 
-2. **Dynamic Search & Filter (`quizzes.html`)**
-   - Real-time search bar that filters quiz cards as the user types without page reload.
-   - Category filter buttons (All, Computer Science, Astana IT, History, Science, Pop Culture).
-   - Combined search and category filtering working simultaneously.
-   - Case-insensitive search across quiz titles and descriptions.
-   - Live counter of matching quizzes and empty result message if no matches found.
+2. **Light / Dark Theme Toggle (`localStorage`)**
+   - Theme toggle button in the navigation bar on every page.
+   - Persists theme selection in `localStorage` (`quiznova_theme`) and applies it immediately on page load across the entire site.
 
-3. **Playable Interactive Quizzes (`quizzes.html`)**
-   - Modal-based quiz engine for 6 different categories with 4 options each.
-   - Immediate feedback on correct (green) and incorrect (red) answers.
-   - Progress bar and final score calculation.
-   - Direct integration allowing users to save their quiz score to the Leaderboard.
+3. **Sign-in & Sign-out Functionality (`localStorage`)**
+   - Dedicated `signin.html` page with client-side email and password validation.
+   - Saves non-sensitive user session info (display name, email, login time) in `localStorage` (`quiznova_user`) and keeps users signed in after page refresh.
+   - Dynamically updates the navbar to display the signed-in player badge and a Sign Out button that clears the session.
 
-4. **Dynamic Table with CRUD Operations (`leaderboard.html`)**
-   - **Create:** Add new player records via a Bootstrap modal dialog.
-   - **Read:** Dynamic table rendering with automatic sorting by score and medals for Top 3.
-   - **Update:** Edit existing players and scores via modal with pre-filled inputs.
-   - **Delete:** Remove records with a browser confirmation prompt (`confirm`).
-   - **LocalStorage:** All changes persist in browser storage.
-   - Live table search by player name or category and a button to reset default sample data.
+4. **jQuery FAQ Accordion (`.slideToggle()`)**
+   - 6 project-related questions on `index.html` (`#faq`).
+   - Smooth sliding open/close animation using jQuery `.slideToggle()` with `+` / `−` visual indicators.
 
-5. **Image Gallery with Lightbox (`gallery.html`)**
-   - Responsive image gallery grid using HTML, CSS, and Bootstrap.
-   - Custom lightbox overlay to enlarge images when clicked.
-   - Navigation arrows (Next / Previous) to switch between photos.
-   - Smooth jQuery transitions (`fadeIn`, `fadeOut`).
-   - Keyboard navigation support (`Escape` to close, `ArrowLeft` / `ArrowRight` to navigate).
+5. **Public API Integration (`fetch()` + JSON)**
+   - **Open Trivia Database API** on `quizzes.html`: dynamically fetches JSON trivia questions with user controls for category, difficulty, question count, and refresh, plus full error handling and retry support.
+   - **Useless Facts API** on `index.html`: allows users to refresh the Fact of the Day dynamically with error fallback.
 
-6. **General Layout & Responsive Design**
-   - Flexbox navigation header across all pages.
-   - Responsive CSS Grid and Bootstrap utilities for mobile, tablet, and desktop viewports.
-   - Floating back-to-top button with smooth scroll animation.
+6. **Endterm Core Features**
+   - Client-side registration validation with email regex and password strength bar (`register.html`).
+   - Live quiz search, category filters, and playable modal quizzes (`quizzes.html`).
+   - Full Leaderboard CRUD with `localStorage` (`leaderboard.html`).
+   - Responsive photo gallery with jQuery lightbox and keyboard controls (`gallery.html`).
 
 ---
 
 ## Technologies Used
 
-- **HTML5:** Semantic elements (`header`, `nav`, `main`, `section`, `footer`, `table`, `form`)
-- **CSS3:** Custom styles, CSS variables (`:root`), Flexbox, CSS Grid, media queries
-- **Bootstrap 5.3:** Grid system, responsive utilities, modals, buttons, alerts
-- **JavaScript (ES6):** DOM manipulation, regex validation, array methods, LocalStorage API
-- **jQuery 3.7.1:** Event handling, DOM selection and manipulation, `.fadeIn()`, `.fadeOut()`, `.animate()`
+- **HTML5** — semantic structure (`header`, `nav`, `main`, `section`, `footer`, `table`, `form`)
+- **CSS3** — CSS variables, Flexbox, Grid, responsive media queries, Light/Dark theme styles
+- **Bootstrap 5.3** — responsive grid, modals, alerts, forms, native dark theme support
+- **JavaScript** — `fetch()` API, JSON parsing, `localStorage`, DOM manipulation, regex validation
+- **jQuery 3.7.1** — `.slideToggle()`, `.fadeIn()`, `.fadeOut()`, `.animate()`, event handling
 
 ---
 
 ## How to Run & Deploy
 
-### Run Locally:
-Open `index.html` in any browser or launch with Live Server in VS Code.
-
-### Publish to GitHub Pages:
-1. Push updates to the GitHub repository:
-   ```bash
-   git add .
-   git commit -m "Complete Endterm enhancements"
-   git push origin main
-   ```
-2. Open your repository on GitHub.
-3. Go to **Settings** > **Pages**.
-4. Under **Source**, choose branch `main` and folder `/ (root)`.
-5. Click **Save**. The live URL will be active in 1-2 minutes:
-   `https://aibergen74-create.github.io/webendterm/`
+1. Open `index.html` locally in a browser or using VS Code Live Server.
+2. Push all files to the `main` branch of `https://github.com/aibergen74-create/webendterm` before the LMS deadline.
+3. GitHub Pages automatically serves the live site at `https://aibergen74-create.github.io/webendterm/`.

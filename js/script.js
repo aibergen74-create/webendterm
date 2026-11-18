@@ -1,10 +1,15 @@
 $(document).ready(function () {
+  initThemeToggle();
+  initAuth();
   initRegister();
   initQuizzesSearch();
   initLeaderboard();
   initGallery();
   initBackToTop();
   initQuizGame();
+  initFaqAccordion();
+  initLiveTriviaApi();
+  initRandomFactApi();
 });
 
 function initRegister() {
@@ -54,6 +59,7 @@ function initRegister() {
     var validTerms = checkTerms();
 
     if (validName && validEmail && validPass && validConfirm && validTerms) {
+      saveRegisteredUser($name.val().trim(), $email.val().trim().toLowerCase(), $("#regTopic").val());
       $("#formAlertError").slideUp(200);
       $("#formAlertSuccess")
         .html("<strong>Welcome, " + $name.val() + "!</strong> Registration completed successfully.")
@@ -794,7 +800,8 @@ function initQuizGame() {
     $("#quizQuestionContainer").show();
     $("#quizResultContainer").hide();
     $("#quizSaveAlert").hide();
-    $("#quizPlayerNameInput").val("");
+    var activeUser = getSignedInUser();
+    $("#quizPlayerNameInput").val(activeUser ? activeUser.name : "");
 
     renderQuestion();
     modal.show();
@@ -918,5 +925,431 @@ function initQuizGame() {
     $("#quizSaveAlert").hide();
     $("#btnSaveQuizScore").prop("disabled", false);
     renderQuestion();
+  });
+}
+
+
+function initThemeToggle() {
+  var storageKey = "quiznova_theme";
+  var $btn = $("#themeToggleBtn");
+
+  function applyTheme(theme) {
+    var isDark = theme === "dark";
+    if (isDark) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.setAttribute("data-bs-theme", "dark");
+      $("body").addClass("dark-theme");
+      $btn.text("☀️ Light");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.setAttribute("data-bs-theme", "light");
+      $("body").removeClass("dark-theme");
+      $btn.text("🌙 Dark");
+    }
+  }
+
+  var saved = localStorage.getItem(storageKey) || "light";
+  applyTheme(saved);
+
+  $btn.on("click", function () {
+    var current = localStorage.getItem(storageKey) || "light";
+    var next = current === "dark" ? "light" : "dark";
+    localStorage.setItem(storageKey, next);
+    applyTheme(next);
+  });
+}
+
+function getSignedInUser() {
+  var raw = localStorage.getItem("quiznova_user");
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+}
+
+function saveRegisteredUser(name, email, topic) {
+  var list = [];
+  var raw = localStorage.getItem("quiznova_registered_users");
+  if (raw) {
+    try {
+      list = JSON.parse(raw);
+    } catch (e) {
+      list = [];
+    }
+  }
+  var exists = false;
+  for (var i = 0; i < list.length; i++) {
+    if (list[i].email === email) {
+      list[i].name = name;
+      list[i].topic = topic;
+      exists = true;
+      break;
+    }
+  }
+  if (!exists) {
+    list.push({ name: name, email: email, topic: topic });
+  }
+  localStorage.setItem("quiznova_registered_users", JSON.stringify(list));
+}
+
+function findRegisteredUserName(email) {
+  var raw = localStorage.getItem("quiznova_registered_users");
+  if (!raw) return "";
+  try {
+    var list = JSON.parse(raw);
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].email === email) {
+        return list[i].name;
+      }
+    }
+  } catch (e) {
+    return "";
+  }
+  return "";
+}
+
+function initAuth() {
+  var userKey = "quiznova_user";
+
+  function renderAuthUI() {
+    var user = getSignedInUser();
+
+    if (user) {
+      $(".nav-guest-only").hide();
+      $(".nav-user-only").show();
+      $("#navUserName").text(user.name);
+
+      if ($("#signInSection").length) {
+        $("#signInSection").hide();
+        $("#signedInSection").show();
+        $("#profileUserName").text(user.name);
+        $("#profileDetailName").text(user.name);
+        $("#profileDetailEmail").text(user.email);
+        $("#profileDetailTime").text(user.signedInAt || "Just now");
+      }
+    } else {
+      $(".nav-guest-only").show();
+      $(".nav-user-only").hide();
+
+      if ($("#signInSection").length) {
+        $("#signedInSection").hide();
+        $("#signInSection").show();
+      }
+    }
+  }
+
+  function signOut() {
+    localStorage.removeItem(userKey);
+    renderAuthUI();
+    if ($("#signInForm").length) {
+      $("#signInForm")[0].reset();
+      $("#signInForm .is-valid, #signInForm .is-invalid").removeClass("is-valid is-invalid");
+      $("#signInAlertError").hide();
+      $("#signInAlertSuccess")
+        .html("You have signed out successfully.")
+        .slideDown(200);
+    }
+  }
+
+  $("#navSignOutBtn, #btnSignOutPage").on("click", function () {
+    signOut();
+  });
+
+  var $form = $("#signInForm");
+  if ($form.length) {
+    var $email = $("#loginEmail");
+    var $name = $("#loginDisplayName");
+    var $password = $("#loginPassword");
+    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    function checkLoginEmail() {
+      var val = $email.val().trim();
+      if (!val || !emailRegex.test(val)) {
+        $email.removeClass("is-valid").addClass("is-invalid");
+        $("#loginEmailFeedback").text("Please enter a valid email address.").show();
+        return false;
+      }
+      $email.removeClass("is-invalid").addClass("is-valid");
+      $("#loginEmailFeedback").hide();
+      return true;
+    }
+
+    function checkLoginPassword() {
+      var val = $password.val();
+      if (!val || val.length < 6) {
+        $password.removeClass("is-valid").addClass("is-invalid");
+        $("#loginPasswordFeedback").text("Password must be at least 6 characters.").show();
+        return false;
+      }
+      $password.removeClass("is-invalid").addClass("is-valid");
+      $("#loginPasswordFeedback").hide();
+      return true;
+    }
+
+    $email.on("input blur", checkLoginEmail);
+    $password.on("input blur", checkLoginPassword);
+
+    $form.on("submit", function (e) {
+      e.preventDefault();
+      var okEmail = checkLoginEmail();
+      var okPass = checkLoginPassword();
+
+      if (!okEmail || !okPass) {
+        $("#signInAlertSuccess").slideUp(150);
+        $("#signInAlertError")
+          .text("Please check your email and password and try again.")
+          .slideDown(200);
+        return;
+      }
+
+      var emailVal = $email.val().trim().toLowerCase();
+      var customName = $name.val().trim();
+      var savedName = findRegisteredUserName(emailVal);
+      var displayName = customName || savedName || emailVal.split("@")[0];
+
+      var sessionData = {
+        name: displayName,
+        email: emailVal,
+        signedInAt: new Date().toLocaleString()
+      };
+
+      localStorage.setItem(userKey, JSON.stringify(sessionData));
+      $("#signInAlertError").hide();
+      renderAuthUI();
+    });
+  }
+
+  renderAuthUI();
+}
+
+function initFaqAccordion() {
+  var $questions = $(".faq-question");
+  if ($questions.length === 0) return;
+
+  $questions.on("click", function () {
+    var $btn = $(this);
+    var $item = $btn.closest(".faq-item");
+    var $answer = $btn.next(".faq-answer");
+    var $icon = $btn.find(".faq-icon");
+    var willOpen = !$item.hasClass("open");
+
+    $item.toggleClass("open", willOpen);
+    $btn.attr("aria-expanded", willOpen ? "true" : "false");
+    $icon.text(willOpen ? "−" : "+");
+    $answer.stop(true, true).slideToggle(280);
+  });
+}
+
+function initLiveTriviaApi() {
+  var $container = $("#apiQuestionsContainer");
+  if ($container.length === 0) return;
+
+  var $btnLoad = $("#btnLoadApiQuiz");
+  var $btnRefresh = $("#btnRefreshApiQuiz");
+  var $btnRetry = $("#btnRetryApi");
+  var $btnSave = $("#btnSaveApiScore");
+  var $loading = $("#apiLoadingBox");
+  var $errorBox = $("#apiErrorBox");
+  var $errorMsg = $("#apiErrorMessage");
+  var $scoreBar = $("#apiScoreBar");
+  var $scoreText = $("#apiLiveScoreText");
+
+  var liveScore = 0;
+  var answeredCount = 0;
+  var totalQuestions = 0;
+  var lastCategoryLabel = "Live Trivia API";
+
+  function decodeHtml(str) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = str;
+    return txt.value;
+  }
+
+  function shuffleArray(arr) {
+    var copy = arr.slice();
+    for (var i = copy.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = copy[i];
+      copy[i] = copy[j];
+      copy[j] = tmp;
+    }
+    return copy;
+  }
+
+  function updateScoreBar() {
+    $scoreText.text(liveScore + " / " + totalQuestions + " correct (" + answeredCount + " answered)");
+    if (answeredCount > 0 && answeredCount === totalQuestions) {
+      $btnSave.show().prop("disabled", false).text("Save Score to Leaderboard");
+    }
+  }
+
+  function loadQuestions() {
+    var category = $("#apiCategorySelect").val();
+    var difficulty = $("#apiDifficultySelect").val();
+    var amount = $("#apiAmountSelect").val() || "5";
+    lastCategoryLabel = $("#apiCategorySelect option:selected").text() || "Live Trivia API";
+
+    var url = "https://opentdb.com/api.php?amount=" + encodeURIComponent(amount) + "&type=multiple";
+    if (category) url += "&category=" + encodeURIComponent(category);
+    if (difficulty) url += "&difficulty=" + encodeURIComponent(difficulty);
+
+    $errorBox.hide();
+    $scoreBar.hide();
+    $btnSave.hide();
+    $container.empty();
+    $loading.show();
+    $btnLoad.prop("disabled", true);
+
+    fetch(url)
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("Server returned HTTP " + response.status);
+        }
+        return response.json();
+      })
+      .then(function (data) {
+        $loading.hide();
+        $btnLoad.prop("disabled", false);
+
+        if (!data || data.response_code !== 0 || !data.results || data.results.length === 0) {
+          var reason = "No questions found for this combination. Try selecting 'Any Difficulty' or another category.";
+          if (data && data.response_code === 5) {
+            reason = "Too many requests to Open Trivia API. Please wait 5 seconds and click Try Again.";
+          }
+          $errorMsg.text(reason);
+          $errorBox.show();
+          return;
+        }
+
+        liveScore = 0;
+        answeredCount = 0;
+        totalQuestions = data.results.length;
+        $scoreBar.show();
+        updateScoreBar();
+
+        data.results.forEach(function (item, idx) {
+          var questionText = decodeHtml(item.question);
+          var correctText = decodeHtml(item.correct_answer);
+          var categoryText = decodeHtml(item.category);
+          var diffText = item.difficulty ? item.difficulty.toUpperCase() : "MIXED";
+
+          var options = item.incorrect_answers.map(decodeHtml);
+          options.push(correctText);
+          options = shuffleArray(options);
+
+          var $card = $('<div class="api-question-card"></div>');
+          var $meta = $('<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-2"></div>');
+          $meta.append($('<span class="badge bg-primary"></span>').text("Q" + (idx + 1) + " • " + categoryText));
+          $meta.append($('<span class="badge bg-light text-dark border"></span>').text(diffText));
+
+          var $qTitle = $('<h6 class="fw-bold mb-0"></h6>').text(questionText);
+          var $grid = $('<div class="api-options-grid"></div>');
+          var $feedback = $('<div class="small fw-semibold mt-2" style="display: none;"></div>');
+
+          options.forEach(function (opt) {
+            var $optBtn = $('<button type="button" class="api-option-btn"></button>').text(opt);
+            $optBtn.on("click", function () {
+              if ($grid.data("answered")) return;
+              $grid.data("answered", true);
+              answeredCount++;
+
+              $grid.find(".api-option-btn").prop("disabled", true);
+              if (opt === correctText) {
+                $optBtn.addClass("correct");
+                liveScore++;
+                $feedback.addClass("text-success").text("Correct!").show();
+              } else {
+                $optBtn.addClass("wrong");
+                $grid.find(".api-option-btn").each(function () {
+                  if ($(this).text() === correctText) {
+                    $(this).addClass("correct");
+                  }
+                });
+                $feedback.addClass("text-danger").text("Incorrect. Correct answer: " + correctText).show();
+              }
+              updateScoreBar();
+            });
+            $grid.append($optBtn);
+          });
+
+          $card.append($meta, $qTitle, $grid, $feedback);
+          $container.append($card);
+        });
+      })
+      .catch(function (err) {
+        $loading.hide();
+        $btnLoad.prop("disabled", false);
+        $errorMsg.text("Could not reach Open Trivia API (" + err.message + "). Check your internet connection and try again.");
+        $errorBox.show();
+      });
+  }
+
+  $btnLoad.on("click", loadQuestions);
+  $btnRefresh.on("click", loadQuestions);
+  $btnRetry.on("click", loadQuestions);
+
+  $btnSave.on("click", function () {
+    var user = getSignedInUser();
+    var playerName = user ? user.name : prompt("Enter your name to save this live trivia score:", "");
+    if (!playerName || !playerName.trim()) return;
+
+    var pct = totalQuestions > 0 ? Math.round((liveScore / totalQuestions) * 100) : 0;
+    var points = liveScore * 250;
+    var storageKey = "quizhub_leaderboard_data";
+    var records = [];
+
+    try {
+      var saved = localStorage.getItem(storageKey);
+      if (saved) records = JSON.parse(saved);
+    } catch (e) {
+      records = [];
+    }
+
+    records.push({
+      id: Date.now(),
+      name: playerName.trim(),
+      category: lastCategoryLabel,
+      quizzes: 1,
+      accuracy: pct,
+      score: points
+    });
+
+    localStorage.setItem(storageKey, JSON.stringify(records));
+    $btnSave.prop("disabled", true).text("Saved to Leaderboard!");
+  });
+
+  loadQuestions();
+}
+
+function initRandomFactApi() {
+  var $btn = $("#btnRefreshFact");
+  var $factText = $("#dailyFactText");
+  var $factErr = $("#dailyFactError");
+  if ($btn.length === 0) return;
+
+  $btn.on("click", function () {
+    $factErr.hide();
+    $btn.prop("disabled", true).text("Loading...");
+
+    fetch("https://uselessfacts.jsph.pl/api/v2/facts/random?language=en")
+      .then(function (res) {
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        if (data && data.text) {
+          $factText.text(data.text);
+        } else {
+          throw new Error("Unexpected response format");
+        }
+      })
+      .catch(function () {
+        $factErr.text("Unable to fetch a new random fact right now. Please try again later.").show();
+      })
+      .finally(function () {
+        $btn.prop("disabled", false).text("Load Random Fact");
+      });
   });
 }

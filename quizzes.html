@@ -11,10 +11,19 @@
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem("quiznova_theme");
+      if (savedTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+      }
+    })();
+  </script>
 </head>
 <body>
 
-  <header class="custom-header">
+    <header class="custom-header">
     <div class="container header-container">
       <a href="index.html" class="site-logo">Quiz<span>Nova</span></a>
       <nav class="custom-nav">
@@ -25,8 +34,18 @@
           <li><a href="gallery.html">Gallery</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="register.html" class="btn-nav-register">Register</a></li>
+          <li class="nav-guest-only"><a href="signin.html" class="btn-nav-signin">Sign In</a></li>
+          <li class="nav-guest-only"><a href="register.html" class="btn-nav-register">Register</a></li>
+          <li class="nav-user-only" style="display: none;">
+            <a href="signin.html" class="nav-user-pill" id="navUserBadge">👤 <span id="navUserName">Player</span></a>
+          </li>
+          <li class="nav-user-only" style="display: none;">
+            <button type="button" id="navSignOutBtn" class="btn-nav-signout">Sign Out</button>
+          </li>
         </ul>
+        <div class="header-controls">
+          <button type="button" id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle color theme">🌙 Dark</button>
+        </div>
       </nav>
     </div>
   </header>
@@ -148,6 +167,72 @@
       </div>
 
     </div>
+
+    <section id="liveTriviaSection" class="live-api-section">
+      <div class="text-center mb-4">
+        <span class="badge bg-primary mb-2 px-3 py-2">Live API Integration</span>
+        <h2 class="fw-bold">Live Trivia Challenge (Open Trivia API)</h2>
+        <p class="text-muted mb-0">Fetch fresh trivia questions in real time from the Open Trivia Database API. Choose your topic and difficulty below.</p>
+      </div>
+
+      <div class="row g-3 align-items-end mb-4">
+        <div class="col-12 col-md-4">
+          <label for="apiCategorySelect" class="form-label fw-semibold small">Category</label>
+          <select id="apiCategorySelect" class="form-select">
+            <option value="">Any Category</option>
+            <option value="18" selected>Science: Computers</option>
+            <option value="17">Science &amp; Nature</option>
+            <option value="23">History</option>
+            <option value="22">Geography</option>
+            <option value="11">Entertainment: Film</option>
+            <option value="9">General Knowledge</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-3">
+          <label for="apiDifficultySelect" class="form-label fw-semibold small">Difficulty</label>
+          <select id="apiDifficultySelect" class="form-select">
+            <option value="">Any Difficulty</option>
+            <option value="easy" selected>Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-2">
+          <label for="apiAmountSelect" class="form-label fw-semibold small">Questions</label>
+          <select id="apiAmountSelect" class="form-select">
+            <option value="5" selected>5</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-3">
+          <button type="button" id="btnLoadApiQuiz" class="custom-btn w-100">Load Live Questions</button>
+        </div>
+      </div>
+
+      <div id="apiLoadingBox" class="text-center py-4" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="text-muted small mt-2 mb-0">Fetching live trivia questions...</p>
+      </div>
+
+      <div id="apiErrorBox" class="alert alert-danger d-flex justify-content-between align-items-center flex-wrap gap-2" style="display: none;" role="alert">
+        <span id="apiErrorMessage">Unable to load trivia questions right now.</span>
+        <button type="button" id="btnRetryApi" class="btn btn-sm btn-outline-danger">Try Again</button>
+      </div>
+
+      <div id="apiScoreBar" class="alert alert-info d-flex justify-content-between align-items-center flex-wrap gap-2" style="display: none;">
+        <div>
+          <strong>Live Session Score:</strong> <span id="apiLiveScoreText">0 / 0</span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" id="btnSaveApiScore" class="btn btn-sm btn-success" style="display: none;">Save Score to Leaderboard</button>
+          <button type="button" id="btnRefreshApiQuiz" class="btn btn-sm btn-outline-primary">New Questions</button>
+        </div>
+      </div>
+
+      <div id="apiQuestionsContainer"></div>
+    </section>
   </main>
 
   <div class="modal fade" id="quizPlayModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
