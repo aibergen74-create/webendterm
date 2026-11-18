@@ -52,6 +52,18 @@ QuizNova lets players explore curated trivia categories, play live API-powered q
 - **JavaScript (ES6):** `fetch()` API, JSON parsing, `localStorage`, DOM manipulation, RegEx validation
 - **jQuery 3.7.1:** `.slideToggle()`, `.fadeIn()`, `.fadeOut()`, `.animate()`, event handling
 
+  ## Project Objectives
+
+- Build an accessible, responsive multi-page trivia platform with consistent navigation and visual styling across desktop, tablet, and mobile devices.
+- Deliver persistent user personalization using `localStorage` for both Light/Dark theme switching and Sign-In/Sign-Out sessions.
+- Enhance interactivity using jQuery animations (`.slideToggle()` FAQ accordion, lightbox transitions) and live JSON data fetched from public APIs (`fetch()`).
+
+## Development Process
+
+1. **Midterm Stage:** Designed the semantic HTML5 structure, shared Flexbox header, responsive CSS Grid layouts, and core pages.
+2. **Endterm Stage:** Implemented client-side registration validation, live quiz search and category filters, playable modal quizzes, a `localStorage`-backed CRUD leaderboard, and a jQuery photo lightbox.
+3. **Final Project Stage:** Added the site-wide Light/Dark theme toggle, `signin.html` session management, the 6-question jQuery `.slideToggle()` FAQ accordion, Open Trivia Database and Useless Facts API integrations with error handling, and full testing on GitHub Pages.
+
 ## Running Locally & Deployment
 
 1. Clone or download the repository and open `index.html` in a browser (or run it with VS Code Live Server).
